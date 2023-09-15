@@ -72,7 +72,7 @@ public class DoctorControler {
     @RequestBody @Valid DoctorDto doctorDto){
         Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
         if (!doctorModelOptional.isPresent()){
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found" );
         }
         var doctorModel = doctorModelOptional.get();
         doctorModel.setRg(doctorDto.getRg());
@@ -82,6 +82,6 @@ public class DoctorControler {
 
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel));
+        return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel) );
     }
 }

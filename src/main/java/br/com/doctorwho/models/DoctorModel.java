@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,12 +20,22 @@ public class DoctorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(nullable = false, length = 70)
-    private String name;
+    @Column(nullable = false, unique = true, length = 10)
+    private String rg;
+    @Column(nullable = false, unique = true, length = 11)
+    private String cpf;
+    @Column(nullable = false, unique = true, length = 50)
+    private String email;
+    @Column(nullable = false, unique = true, length = 18)
+    private String phoneNumber;
     @Column(nullable = false)
-    private Date birthDate;
-    @Column(nullable = false, unique = true)
-    private String crm;
+    private LocalDateTime RegistrationDate;
+
+
+
+
+
+;
 
 
 

@@ -19,16 +19,16 @@ public class DoctorControler {
     public DoctorControler(DoctorServices doctorServices) {this.doctorServices = doctorServices;}
 
     @PostMapping
-    public ResponseEntity<Object> saveDoctor(@RequestBody@Valid DoctorDto doctorDto ){
+    public ResponseEntity<Object> saveDoctor(@RequestBody@Valid DoctorDto doctorDto ) {
         if (doctorServices.existsByRg(doctorDto.getRg())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system.");
         }
 
         if (doctorServices.existsByCpf(doctorDto.getCpf())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the CPF number has already been registered on the system");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the CPF number has already been registered on the system.");
         }
         if (doctorServices.existsByPhoneNumber(doctorDto.getPhoneNumber())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the phone number has already been registered on the system");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the phone number has already been registered on the system.");
         }
         var doctorModel = new DoctorModel();
         BeanUtils.copyProperties(doctorDto, doctorModel);

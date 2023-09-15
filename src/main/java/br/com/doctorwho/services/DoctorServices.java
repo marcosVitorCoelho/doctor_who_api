@@ -10,7 +10,7 @@ public class DoctorServices {
 
     public DoctorServices(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
-    }
+     }
 
     public DoctorModel save(DoctorModel doctorModel){
         return doctorRepository.save(doctorModel);

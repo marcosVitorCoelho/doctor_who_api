@@ -12,7 +12,7 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Data
-public class DoctorDto {
+public class DoctorDto  {
     @NotBlank
     @Size(min = 10, max = 10)
     private String rg;

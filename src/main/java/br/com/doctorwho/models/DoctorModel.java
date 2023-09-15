@@ -23,7 +23,8 @@ public class DoctorModel {
     private String name;
     @Column(nullable = false)
     private Date birthDate;
-    @
+    @Column(nullable = false, unique = true)
+    private String crm;
 
 
 

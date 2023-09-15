@@ -66,4 +66,22 @@ public class DoctorControler {
         doctorServices.delete(doctorModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Doctor deleted");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateDoctor(@PathVariable(value = "id")UUID id,
+    @RequestBody @Valid DoctorDto doctorDto){
+        Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
+        if (!doctorModelOptional.isPresent()){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
+        }
+        var doctorModel = doctorModelOptional.get();
+        doctorModel.setRg(doctorDto.getRg());
+        doctorModel.setCpf(doctorDto.getCpf());
+        doctorModel.setEmail(doctorDto.getEmail());
+        doctorModel.setPhoneNumber(doctorDto.getPhoneNumber());
+
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel));
+    }
 }

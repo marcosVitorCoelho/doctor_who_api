@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/doctor")
@@ -20,6 +24,7 @@ public class DoctorControler {
 
     @PostMapping
     public ResponseEntity<Object> saveDoctor(@RequestBody@Valid DoctorDto doctorDto ) {
+       /*verifica se os dados já existem, caso não exitam, ele cria novo médico*/
         if (doctorServices.existsByRg(doctorDto.getRg())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system.");
         }
@@ -34,5 +39,31 @@ public class DoctorControler {
         BeanUtils.copyProperties(doctorDto, doctorModel);
         doctorModel.setRegistrationDate((LocalDateTime.now(ZoneId.of("UTC"))));
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorServices.save(doctorModel));
+    }
+/* Pega todos medicos no banoc de dados*/
+    @GetMapping
+    public ResponseEntity<List<DoctorModel>> getAllDoctors(){
+        return ResponseEntity.status(HttpStatus.OK).body(doctorServices.findAll());
+    }
+
+    /*Pega um médico pelo id*/
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneDoctor(@PathVariable(value = "id")UUID id){
+        Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
+    if (!doctorModelOptional.isPresent()){
+        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(doctorModelOptional.get());
+    }
+
+    /* deleta pelo id*/
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletDoctor(@PathVariable(value = "id")UUID id){
+        Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
+        if (!doctorModelOptional.isPresent()){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
+        }
+        doctorServices.delete(doctorModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Doctor deleted");
     }
 }

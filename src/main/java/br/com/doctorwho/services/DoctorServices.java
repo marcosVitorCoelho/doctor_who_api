@@ -1,7 +1,13 @@
 package br.com.doctorwho.services;
 import br.com.doctorwho.models.DoctorModel;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import br.com.doctorwho.repositories.DoctorRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class DoctorServices {
 
@@ -26,5 +32,17 @@ public class DoctorServices {
 
     public boolean existsByPhoneNumber(String PhoneNumber){
         return doctorRepository.existsByPhoneNumber(PhoneNumber);
+    }
+
+    public List<DoctorModel> findAll(){
+        return doctorRepository.findAll();
+    }
+
+    public Optional<DoctorModel> findById(UUID id){
+        return doctorRepository.findById(id);
+    }
+@Transactional
+    public void delete(DoctorModel doctorModel){
+        doctorRepository.delete(doctorModel);
     }
 }

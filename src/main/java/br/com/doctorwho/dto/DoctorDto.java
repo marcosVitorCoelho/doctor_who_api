@@ -20,7 +20,7 @@ public class DoctorDto  {
     @Size(min = 11, max = 11)
     private String cpf;
     @NotBlank
-    @Email
+    @Email(message = "email format noe allowd")
     private String email;
     @NotBlank
     private String phoneNumber;

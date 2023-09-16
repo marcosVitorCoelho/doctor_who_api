@@ -1,13 +1,16 @@
+server:
+  port: 8091
 spring:
   datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/doctor_who_db?useTimezone=true&serverTimezone=UTC
-      username: root
-      password: R3siliencia@gaulesa@
+      url: jdbc:postgresql://localhost:5432/Clinica
+      username: postgres
+      password: Rique1312
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
+
+

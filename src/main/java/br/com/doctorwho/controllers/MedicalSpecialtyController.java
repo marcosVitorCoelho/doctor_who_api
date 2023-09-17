@@ -63,7 +63,7 @@ public class MedicalSpecialtyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updadte(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updateSpeciality(@PathVariable(value = "id") UUID id,
     @RequestBody @Valid MedicalSpecialtyDto medicalSpecialtyDto ){
         Optional<MedicalSpecialtyModel> specialtyModelOptional = medicalSpecialtiesServices.findById(id);
         if(!specialtyModelOptional.isPresent()){

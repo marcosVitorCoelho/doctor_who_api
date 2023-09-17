@@ -1,4 +1,4 @@
-package br.com.doctorwho.controlers;
+package br.com.doctorwho.controllers;
 import br.com.doctorwho.dto.DoctorDto;
 import br.com.doctorwho.models.DoctorModel;
 import br.com.doctorwho.services.DoctorServices;
@@ -17,13 +17,13 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/doctor")
-public class DoctorControler {
+public class DoctorController {
     final DoctorServices doctorServices;
 
-    public DoctorControler(DoctorServices doctorServices) {this.doctorServices = doctorServices;}
+    public DoctorController(DoctorServices doctorServices) {this.doctorServices = doctorServices;}
 
     @PostMapping
-    public ResponseEntity<Object> saveDoctor(@RequestBody@Valid DoctorDto doctorDto ) {
+    public ResponseEntity<Object> saveDoctor(@RequestBody @Valid DoctorDto doctorDto ) {
        /*verifica se os dados já existem, caso não exitam, ele cria novo médico*/
         if (doctorServices.existsByRg(doctorDto.getRg())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system.");
@@ -58,7 +58,7 @@ public class DoctorControler {
 
     /* deleta pelo id*/
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletDoctor(@PathVariable(value = "id")UUID id){
+    public ResponseEntity<Object> deleteDoctor(@PathVariable(value = "id")UUID id){
         Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
         if (!doctorModelOptional.isPresent()){
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
@@ -79,7 +79,11 @@ public class DoctorControler {
         doctorModel.setCpf(doctorDto.getCpf());
         doctorModel.setEmail(doctorDto.getEmail());
         doctorModel.setPhoneNumber(doctorDto.getPhoneNumber());
-
+        doctorModel.setAddress(doctorDto.getAddress());
+        doctorModel.setFirstName(doctorDto.getFirstName());
+        doctorModel.setLastName(doctorDto.getLastName());
+        doctorModel.setBirthday(doctorDto.getBirthday());
+        doctorModel.setCrm(doctorDto.getCrm());
 
 
         return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel) );

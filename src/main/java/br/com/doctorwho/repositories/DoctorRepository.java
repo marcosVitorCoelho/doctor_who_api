@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorRepository extends JpaRepository<DoctorModel, UUID>  {
 
-boolean existsByCpf(String cpf);
-boolean existsByRg(String rg);
-boolean existsByPhoneNumber(String phoneNumber);
-
-
+    boolean existsByCpf(String cpf);
+    boolean existsByRg(String rg);
+    boolean existsByPhoneNumber(String phoneNumber);
+    
 }

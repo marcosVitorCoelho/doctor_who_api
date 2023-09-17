@@ -1,29 +1,47 @@
 package br.com.doctorwho.dto;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import jakarta.validation.constraints.NotBlank;
-import org.springframework.format.annotation.NumberFormat;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import br.com.doctorwho.models.AddressModel;
 
 @Data
 public class DoctorDto  {
+
+    @NotBlank
+    @Size(min = 1, max = 15)
+    private String firstName;
+
+    @NotBlank
+    @Size(min = 1, max = 15)
+    private String lastName;
+
     @NotBlank
     @Size(min = 10, max = 10)
     private String rg;
+
     @NotBlank
     @Size(min = 11, max = 11)
     private String cpf;
+
     @NotBlank
-    @Email(message = "email format noe allowd")
+    @Email(message = "email format not allowed")
     private String email;
+
     @NotBlank
     private String phoneNumber;
 
+    @Valid
+    private AddressModel address;
 
+    @NotBlank
+    private String birthday;
+
+    @NotBlank
+    @Size(min = 9 , max = 9)
+    private String crm;
 }

@@ -6,17 +6,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.doctorwho.dto.MedicalSpecialtyDto;
 import br.com.doctorwho.models.MedicalSpecialtyModel;
@@ -66,5 +60,19 @@ public class MedicalSpecialtyController {
         }
         medicalSpecialtiesServices.delete(specialtyModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Specialty deleted");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updadte(@PathVariable(value = "id") UUID id,
+    @RequestBody @Valid MedicalSpecialtyDto medicalSpecialtyDto ){
+        Optional<MedicalSpecialtyModel> specialtyModelOptional = medicalSpecialtiesServices.findById(id);
+        if(!specialtyModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Specialty not found");
+        }
+         var medicalSpecialityModel = specialtyModelOptional.get();
+         medicalSpecialityModel.setTitle(medicalSpecialtyDto.getTitle());
+         medicalSpecialityModel.setDescription(medicalSpecialtyDto.getDescription());
+
+         return  ResponseEntity.status(HttpStatus.OK).body(medicalSpecialtiesServices.save(medicalSpecialityModel));
     }
 }

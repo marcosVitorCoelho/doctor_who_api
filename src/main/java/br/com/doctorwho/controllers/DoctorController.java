@@ -4,9 +4,11 @@ import br.com.doctorwho.models.DoctorModel;
 import br.com.doctorwho.services.DoctorServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -20,10 +22,15 @@ import java.util.UUID;
 public class DoctorController {
     final DoctorServices doctorServices;
 
+    @Autowired
+    private FileUploadController fileUploadController;
+
+
     public DoctorController(DoctorServices doctorServices) {this.doctorServices = doctorServices;}
 
     @PostMapping
-    public ResponseEntity<Object> saveDoctor(@RequestBody @Valid DoctorDto doctorDto ) {
+    public ResponseEntity<Object> saveDoctor(@RequestPart("doctorDto") @Valid DoctorDto doctorDto,
+        @RequestPart("file") MultipartFile file) {
        /*verifica se os dados já existem, caso não exitam, ele cria novo médico*/
         if (doctorServices.existsByRg(doctorDto.getRg())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system.");
@@ -37,6 +44,17 @@ public class DoctorController {
         }
         var doctorModel = new DoctorModel();
         BeanUtils.copyProperties(doctorDto, doctorModel);
+
+        ResponseEntity<String> uploadResponse = fileUploadController.uploadFile(file);
+
+        if (uploadResponse.getStatusCode() != HttpStatus.OK) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao fazer o upload da imagem.");
+        }
+
+        String imageURL = uploadResponse.getBody();
+        doctorModel.setCloudinaryImageURL(imageURL);
+
+
         doctorModel.setRegistrationDate((LocalDateTime.now(ZoneId.of("UTC"))));
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorServices.save(doctorModel));
     }
@@ -84,6 +102,7 @@ public class DoctorController {
         doctorModel.setLastName(doctorDto.getLastName());
         doctorModel.setBirthday(doctorDto.getBirthday());
         doctorModel.setCrm(doctorDto.getCrm());
+        doctorModel.setMedicalSpecialty(doctorDto.getMedicalSpecialty());
 
 
         return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel) );

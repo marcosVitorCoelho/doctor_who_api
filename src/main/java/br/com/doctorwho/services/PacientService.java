@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PacientService {
+public class PacientService  {
     final PacientRepository pacientRepository;
 
     public PacientService(PacientRepository pacientRepository) {

@@ -11,7 +11,7 @@ import br.com.doctorwho.repositories.MedicalSpecialtiesRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class MedicalSpecialtiesServices {
+public class MedicalSpecialtiesServices  {
     
     final MedicalSpecialtiesRepository medicalSpecialtiesRepository;
 

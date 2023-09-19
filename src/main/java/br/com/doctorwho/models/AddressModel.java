@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Data
 @Embeddable
-public class AddressModel {
+public class AddressModel  {
 
     @NotBlank(message = "street is required")
     private String street;

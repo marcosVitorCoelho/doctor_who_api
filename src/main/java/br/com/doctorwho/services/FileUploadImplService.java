@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class FileUploadImplService implements FileUpload{
+public class FileUploadImplService implements FileUpload {
    final Cloudinary cloudinary;
 
     public FileUploadImplService(Cloudinary cloudinary){

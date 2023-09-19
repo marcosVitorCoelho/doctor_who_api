@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import br.com.doctorwho.models.AddressModel;
 
-public interface Person {
+public interface Person  {
     String getFirstName();
     void setFirstName(String firstName);
 

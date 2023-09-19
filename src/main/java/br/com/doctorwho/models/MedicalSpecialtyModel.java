@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Table(name = "TB_SPECIALTIES")
 @Data
-public class MedicalSpecialtyModel {
+public class MedicalSpecialtyModel  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

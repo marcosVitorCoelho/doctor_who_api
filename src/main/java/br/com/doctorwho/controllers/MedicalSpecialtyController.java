@@ -22,7 +22,7 @@ public class MedicalSpecialtyController {
     
     final MedicalSpecialtiesServices medicalSpecialtiesServices;
 
-    public MedicalSpecialtyController(MedicalSpecialtiesServices medicalSpecialtiesServices) {
+    public MedicalSpecialtyController(MedicalSpecialtiesServices medicalSpecialtiesServices)  {
     this.medicalSpecialtiesServices = medicalSpecialtiesServices;
     }
 

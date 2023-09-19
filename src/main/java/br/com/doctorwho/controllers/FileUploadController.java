@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/upload")
-public class FileUploadController {
+public class FileUploadController   {
 
     private final FileUploadImplService fileUploadImplService;
 

@@ -10,7 +10,7 @@ import br.com.doctorwho.interfaces.Person;
 @Entity
 @Table(name = "TB_DOCTORs")
 @Data
-public class DoctorModel implements Person{
+public class DoctorModel implements Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

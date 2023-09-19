@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "TB_PACIENTs")
 @Data
-public class PacientModel implements Person{
+public class PacientModel implements Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

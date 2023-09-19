@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class DoctorServices {
+public class DoctorServices  {
 
     final DoctorRepository doctorRepository;
 

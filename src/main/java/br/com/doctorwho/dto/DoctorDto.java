@@ -10,7 +10,7 @@ import br.com.doctorwho.models.AddressModel;
 import br.com.doctorwho.models.MedicalSpecialtyModel;
 
 @Data
-public class DoctorDto  {
+public class DoctorDto   {
 
     @NotBlank
     @Size(min = 1, max = 15)

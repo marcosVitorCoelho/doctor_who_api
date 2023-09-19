@@ -11,5 +11,5 @@ public interface DoctorRepository extends JpaRepository<DoctorModel, UUID>  {
     boolean existsByCpf(String cpf);
     boolean existsByRg(String rg);
     boolean existsByPhoneNumber(String phoneNumber);
-    
+    boolean existsByCrm(String crm);    
 }

@@ -44,7 +44,8 @@ public class DoctorDto  {
     @NotBlank
     @Size(min = 9 , max = 9)
     private String crm;
-
-    @NotBlank
+    
+    @Valid
     private MedicalSpecialtyModel medicalSpecialty;
+
 }

@@ -1,6 +1,7 @@
 package br.com.doctorwho.controllers;
 import br.com.doctorwho.dto.DoctorDto;
 import br.com.doctorwho.models.DoctorModel;
+import br.com.doctorwho.models.MedicalSpecialtyModel;
 import br.com.doctorwho.services.DoctorServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -25,6 +26,9 @@ public class DoctorController {
     @Autowired
     private FileUploadController fileUploadController;
 
+    @Autowired
+    private MedicalSpecialtyController medicalSpecialtyController;
+
 
     public DoctorController(DoctorServices doctorServices) {this.doctorServices = doctorServices;}
 
@@ -42,19 +46,34 @@ public class DoctorController {
         if (doctorServices.existsByPhoneNumber(doctorDto.getPhoneNumber())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the phone number has already been registered on the system.");
         }
+        if (doctorServices.existsByCrm(doctorDto.getCrm())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the CRM number has already been registered on the system.");
+        }
+
+
         var doctorModel = new DoctorModel();
         BeanUtils.copyProperties(doctorDto, doctorModel);
 
         ResponseEntity<String> uploadResponse = fileUploadController.uploadFile(file);
 
+        
         if (uploadResponse.getStatusCode() != HttpStatus.OK) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao fazer o upload da imagem.");
         }
-
+        
         String imageURL = uploadResponse.getBody();
         doctorModel.setCloudinaryImageURL(imageURL);
+        
+        ResponseEntity<Object> specialtyResponse = medicalSpecialtyController.getOneSpecialty(doctorDto.getMedicalSpecialty().getId());
 
-
+        if(specialtyResponse.getBody() instanceof MedicalSpecialtyModel){
+            MedicalSpecialtyModel specialtyModel = (MedicalSpecialtyModel) specialtyResponse.getBody();
+            if(specialtyModel != null){
+                String specialtyName = specialtyModel.getTitle();
+                doctorModel.setMedicalSpecialty(specialtyName);
+            }
+           
+        }
         doctorModel.setRegistrationDate((LocalDateTime.now(ZoneId.of("UTC"))));
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorServices.save(doctorModel));
     }
@@ -102,8 +121,6 @@ public class DoctorController {
         doctorModel.setLastName(doctorDto.getLastName());
         doctorModel.setBirthday(doctorDto.getBirthday());
         doctorModel.setCrm(doctorDto.getCrm());
-        doctorModel.setMedicalSpecialty(doctorDto.getMedicalSpecialty());
-
 
         return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel) );
     }

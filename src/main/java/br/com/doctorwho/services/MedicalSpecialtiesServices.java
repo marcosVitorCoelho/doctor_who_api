@@ -13,7 +13,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class MedicalSpecialtiesServices {
     
-
     final MedicalSpecialtiesRepository medicalSpecialtiesRepository;
 
     public MedicalSpecialtiesServices(MedicalSpecialtiesRepository medicalSpecialtiesRepository) {
@@ -32,7 +31,7 @@ public class MedicalSpecialtiesServices {
     public boolean existsByTitle(String title){
         return medicalSpecialtiesRepository.existsByTitle(title);
     }
-
+    @Transactional
     public MedicalSpecialtyModel save(MedicalSpecialtyModel medicalSpecialtyModel){
         return medicalSpecialtiesRepository.save(medicalSpecialtyModel);
     }

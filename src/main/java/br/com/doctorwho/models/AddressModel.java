@@ -8,15 +8,15 @@ import jakarta.validation.constraints.NotBlank;
 @Embeddable
 public class AddressModel {
 
-    @NotBlank(message = "Logradouro is required")
-    private String logradouro;
+    @NotBlank(message = "street is required")
+    private String street;
 
-    @NotBlank(message = "Cidade is required")
-    private String cidade;
+    @NotBlank(message = "city is required")
+    private String city;
 
-    @NotBlank(message = "Bairro is required")
-    private String Bairro;
+    @NotBlank(message = "district is required")
+    private String district;
 
-    @NotBlank(message = "Número is required")
-    private String Numero;
+    @NotBlank(message = "number is required")
+    private String number;
 }

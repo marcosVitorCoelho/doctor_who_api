@@ -34,6 +34,10 @@ public class DoctorServices {
         return doctorRepository.existsByPhoneNumber(PhoneNumber);
     }
 
+    public boolean existsByCrm(String crm){
+        return doctorRepository.existsByCrm(crm);
+    }
+
     public List<DoctorModel> findAll(){
         return doctorRepository.findAll();
     }

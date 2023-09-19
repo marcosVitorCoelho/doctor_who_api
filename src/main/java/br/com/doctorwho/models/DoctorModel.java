@@ -45,8 +45,8 @@ public class DoctorModel implements Person{
     @Column(nullable = false)
     private String crm;
 
-    @Column(nullable = false)
-    private MedicalSpecialtyModel medicalSpecialty;
+    @Column(nullable = false, length = 50)
+    private String medicalSpecialty;
 
     private String cloudinaryImageURL;
 }

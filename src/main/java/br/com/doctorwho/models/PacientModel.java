@@ -41,4 +41,6 @@ public class PacientModel implements Person{
 
     @Column(nullable = false)
     private AddressModel address;
+
+    private String cloudinaryImageURL;
 }

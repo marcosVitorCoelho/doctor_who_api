@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AutenticationController  {
 
 AdminRespository adminRespository;
@@ -33,10 +33,12 @@ TokenServices tokenServices;
     @PostMapping("/register")
     public ResponseEntity resgister(@RequestBody @Valid UserResgisterDto userResgisterDto){
         if (this.adminRespository.findByLogin(userResgisterDto.login()) != null){
-            return  ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT");
+            return  ResponseEntity.badRequest().build();
         }
         String ecryptedPassWord = new BCryptPasswordEncoder().encode(userResgisterDto.password());
-        User newUser = new User(userResgisterDto.login(), userResgisterDto.password(), userResgisterDto.role());
+        User newUser = new User(userResgisterDto.login(), ecryptedPassWord, userResgisterDto.role());
+
+        this.adminRespository.save(newUser);
         return ResponseEntity.ok().build();
     }
 

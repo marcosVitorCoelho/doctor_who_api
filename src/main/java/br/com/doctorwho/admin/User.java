@@ -4,7 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,16 +18,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 @Data
-@Entity
+@Entity(name = "users")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class User implements UserDetails {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public UUID id;
-   private  String login;
+    private  String login;
 
-   private String password;
+    private String password;
 
-   private UserRole role;
+    private UserRole role;
 
     public User(String login, String password, UserRole role)  {
         this.login = login;

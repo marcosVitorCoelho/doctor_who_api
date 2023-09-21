@@ -1,7 +1,7 @@
 package br.com.doctorwho.admin;
 
 public enum UserRole {
-    USER("ADMIN");
+    ADMIN("ADMIN");
     private String role;
 
     UserRole(String role){

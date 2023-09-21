@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
 public class AutenticationController  {
 
     @Autowired
@@ -30,11 +30,12 @@ public class AutenticationController  {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid UserDto userDto){
-    var username = new UsernamePasswordAuthenticationToken(userDto.login(), userDto.password());
-    var auth = authenticationManager.authenticate(username);
-    var token = tokenServices.generateToken((User) auth.getPrincipal());
-    return ResponseEntity.ok(new LoginResponseDto(token));
+        var usernamePassword = new UsernamePasswordAuthenticationToken(userDto.login(), userDto.password());
+        var auth = authenticationManager.authenticate(usernamePassword);
+        var token = tokenServices.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
+
     @PostMapping("/register")
     public ResponseEntity resgister(@RequestBody @Valid UserResgisterDto userResgisterDto){
         if (this.adminRespository.findByLogin(userResgisterDto.login()) != null){

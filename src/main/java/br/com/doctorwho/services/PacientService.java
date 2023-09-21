@@ -17,8 +17,6 @@ public class PacientService  {
         this.pacientRepository = pacientRepository;
     }
 
-
-
     public PacientModel save(PacientModel pacientModel){
         return pacientRepository.save(pacientModel);
     }

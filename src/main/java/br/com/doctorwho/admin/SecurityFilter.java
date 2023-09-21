@@ -15,10 +15,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
+
     @Autowired
     TokenServices tokenservice;
+
     @Autowired
     AdminRespository adminRespository;
+    
     @Override
     protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoveryToken(request);

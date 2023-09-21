@@ -19,10 +19,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AutenticationController  {
 
-AdminRespository adminRespository;
-private AuthenticationManager authenticationManager;
-@Autowired
-TokenServices tokenServices;
+    @Autowired
+    private AdminRespository adminRespository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    TokenServices tokenServices;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid UserDto userDto){
     var username = new UsernamePasswordAuthenticationToken(userDto.login(), userDto.password());

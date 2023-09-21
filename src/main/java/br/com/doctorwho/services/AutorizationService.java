@@ -6,7 +6,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class AutorizationService implements UserDetailsService {
-    AdminRespository adminRespository;
+    final AdminRespository adminRespository;
+
+    public AutorizationService(AdminRespository adminRespository) {
+        this.adminRespository = adminRespository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException   {
         return adminRespository.findByLogin(login);

@@ -13,8 +13,8 @@ import java.time.ZoneOffset;
 
 @Service
 public class TokenServices {
- @Value("${api.security.token.secret}")
-   private String secret;
+    @Value("${api.security.token.secret}")
+    private String secret;
     public String generateToken(User user){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -24,7 +24,7 @@ public class TokenServices {
                     .withIssuedAt(genExpirationDate())
                     .sign(algorithm);
             return token;
-        }catch (JWTCreationException e) {
+        } catch (JWTCreationException e) {
             throw new RuntimeException("Error while generate token");
 
         }

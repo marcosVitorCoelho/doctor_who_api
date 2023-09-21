@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,7 @@ public class DoctorController   {
     @PostMapping
     public ResponseEntity<Object> saveDoctor(@RequestPart("doctorDto") @Valid DoctorDto doctorDto,
         @RequestPart("file") MultipartFile file) {
+
        /*verifica se os dados já existem, caso não exitam, ele cria novo médico*/
         if (doctorServices.existsByRg(doctorDto.getRg())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: the RG number has already been registered on the system.");
@@ -78,12 +80,14 @@ public class DoctorController   {
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorServices.save(doctorModel));
     }
 /* Pega todos medicos no banoc de dados*/
+
     @GetMapping
     public ResponseEntity<List<DoctorModel>> getAllDoctors(){
         return ResponseEntity.status(HttpStatus.OK).body(doctorServices.findAll());
     }
 
     /*Pega um médico pelo id*/
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneDoctor(@PathVariable(value = "id")UUID id){
         Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
@@ -94,6 +98,7 @@ public class DoctorController   {
     }
 
     /* deleta pelo id*/
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteDoctor(@PathVariable(value = "id")UUID id){
         Optional<DoctorModel> doctorModelOptional = doctorServices.findById(id);
@@ -103,6 +108,7 @@ public class DoctorController   {
         doctorServices.delete(doctorModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Doctor deleted");
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateDoctor(@PathVariable(value = "id")UUID id,
@@ -121,6 +127,7 @@ public class DoctorController   {
         doctorModel.setLastName(doctorDto.getLastName());
         doctorModel.setBirthday(doctorDto.getBirthday());
         doctorModel.setCrm(doctorDto.getCrm());
+
 
         return ResponseEntity.status(HttpStatus.OK).body(doctorServices.save(doctorModel) );
     }

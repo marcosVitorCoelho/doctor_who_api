@@ -15,6 +15,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 @SpringBootApplication
 @RestController
 public class StartUp {
+
 	Dotenv dotenv = Dotenv.load();
 
 	private final String CLOUD_NAME = dotenv.get("CLOUDINARY_NAME");

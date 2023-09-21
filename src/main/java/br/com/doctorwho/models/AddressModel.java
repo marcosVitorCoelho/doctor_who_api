@@ -1,13 +1,19 @@
 package br.com.doctorwho.models;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
+
+import javax.naming.Name;
+import java.util.UUID;
+
 
 @Data
 @Embeddable
 public class AddressModel  {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     @NotBlank(message = "street is required")
     private String street;
 

@@ -48,4 +48,6 @@ public class DoctorDto   {
     @Valid
     private MedicalSpecialtyModel medicalSpecialty;
 
+
+
 }

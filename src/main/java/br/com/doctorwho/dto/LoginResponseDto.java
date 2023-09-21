@@ -1,4 +1,4 @@
 package br.com.doctorwho.dto;
 
-public record LoginResponseDto(String token) {
+public record LoginResponseDto(String token)  {
 }

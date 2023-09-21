@@ -4,5 +4,5 @@ import br.com.doctorwho.admin.UserRole;
 import lombok.Data;
 
 @Data
-public record UserResgisterDto(String login, String password, UserRole role) {
+public record UserResgisterDto(String login, String password, UserRole role)  {
 }

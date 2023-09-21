@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public record UserDto(String login, String password){
+public record UserDto(String login, String password) {
 
 }
 

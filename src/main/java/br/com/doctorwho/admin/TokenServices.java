@@ -24,7 +24,7 @@ public class TokenServices {
                     .withIssuedAt(genExpirationDate())
                     .sign(algorithm);
             return token;
-        }catch (JWTCreationException e){
+        }catch (JWTCreationException e) {
             throw new RuntimeException("Error while generate token");
 
         }

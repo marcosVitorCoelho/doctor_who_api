@@ -8,7 +8,6 @@ import br.com.doctorwho.dto.UserResgisterDto;
 import br.com.doctorwho.repositories.AdminRespository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AutenticationController  {
 
     @Autowired
@@ -26,12 +25,12 @@ public class AutenticationController  {
     private AuthenticationManager authenticationManager;
     
     @Autowired
-    TokenServices tokenServices;
+    private TokenServices tokenServices;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid UserDto userDto){
         var usernamePassword = new UsernamePasswordAuthenticationToken(userDto.login(), userDto.password());
-        var auth = authenticationManager.authenticate(usernamePassword);
+        var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenServices.generateToken((User) auth.getPrincipal());
         return ResponseEntity.ok(new LoginResponseDto(token));
     }

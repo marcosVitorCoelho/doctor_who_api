@@ -29,11 +29,11 @@ public class AgendamentoControler {
     @PostMapping
     public ResponseEntity<Object> saveAgendamento(@RequestBody @Valid AgendamentoDto agendamentoDto) {
 
-        PacientModel pacient = pacientService.findByFullName(agendamentoDto.getPacientfULLName());
+        PacientModel pacient = pacientService.findByFullName(agendamentoDto.getPacientfULLName()) ;
         if (pacient == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pacient Not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pacient Not found") ;
         }
-        DoctorModel doctor = doctorServices.findByFullName(agendamentoDto.getDoctorname());
+        DoctorModel doctor = doctorServices.findByFullName(agendamentoDto.getDoctorname()) ;
         if (doctor == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor Not found");
         }
@@ -48,7 +48,7 @@ public class AgendamentoControler {
         agendamentoModel.setDoctorSpeciality(doctor.getMedicalSpecialty());
         agendamentoModel.setDoctorname(doctor.getFullName());
 
-        if (agendamentoServices.existByDoctorAndDatetime(agendamentoDto.getDoctorname(), agendamentoDto.getAppointmentDate())) {
+        if (agendamentoServices.existByDoctorAndDatetime( agendamentoModel.getDoctorname(), agendamentoModel.getDatetime() )) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This time isn't available");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(agendamentoServices.save(agendamentoModel));

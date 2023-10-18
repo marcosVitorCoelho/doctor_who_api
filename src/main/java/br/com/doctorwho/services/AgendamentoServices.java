@@ -1,4 +1,5 @@
 package br.com.doctorwho.services;
+
 import br.com.doctorwho.models.AgendamentoModel;
 import br.com.doctorwho.repositories.AgendamentoRepository;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,15 @@ public class AgendamentoServices {
     }
 
 
-    public boolean existByDoctorAndDatetime(String doctorCode, String date){
-        return agendamentoRepository.existsByDatetimeAndDoctorname(date, doctorCode);
+    public boolean existByDoctorAndDatetime( String doctorName, String date ){
+        return agendamentoRepository.existsByDatetimeAndDoctorname( doctorName, date);
     }
 
     public boolean exsitByCode(String code){
         return  agendamentoRepository.existsByCode(code);
     }
 
-    public AgendamentoModel save ( AgendamentoModel agendamentoModel) {
+    public AgendamentoModel save  ( AgendamentoModel agendamentoModel) {
         return agendamentoRepository.save(agendamentoModel);}
 
     public List<AgendamentoModel> findAll(){

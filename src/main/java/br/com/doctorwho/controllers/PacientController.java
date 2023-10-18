@@ -105,8 +105,7 @@ public class PacientController {
         pacientModel.setEmail(pacientDto.getEmail());
         pacientModel.setPhoneNumber(pacientDto.getPhoneNumber());
         pacientModel.setAddress(pacientDto.getAddress());
-        pacientModel.setFirstName(pacientDto.getFirstName());
-        pacientModel.setLastName(pacientDto.getLastName());
+        pacientModel.setFullName(pacientDto.getFullName());
         pacientModel.setBirthday(pacientDto.getBirthday());
         return ResponseEntity.status(HttpStatus.OK).body(pacientService.save(pacientModel) );
     }

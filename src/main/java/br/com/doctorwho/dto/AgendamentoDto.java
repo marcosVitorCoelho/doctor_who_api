@@ -9,18 +9,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Date;
 @Data
-public class AgendamentoDto {
-        @NotBlank
-        private long code;
+public class AgendamentoDto  {
         @NotBlank
         @Size(max = 8)
-        private Date datetime;
+        private String appointmentDate;
         @NotBlank
-        private PacientModel pacient;
+        private String pacientfULLName;
         @NotBlank
-        private DoctorModel doctor;
+        private String doctorname;
         @NotBlank
         private String  appointmentType;
         @NotBlank

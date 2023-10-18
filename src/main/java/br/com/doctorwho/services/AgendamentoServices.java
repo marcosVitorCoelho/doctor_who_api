@@ -1,30 +1,28 @@
 package br.com.doctorwho.services;
-
 import br.com.doctorwho.models.AgendamentoModel;
-import br.com.doctorwho.models.DoctorModel;
 import br.com.doctorwho.repositories.AgendamentoRepository;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Service
 public class AgendamentoServices {
 
 
    final  AgendamentoRepository agendamentoRepository;
 
-    public AgendamentoServices(AgendamentoRepository agendamentoRepository) {
+    public AgendamentoServices(AgendamentoRepository agendamentoRepository)  {
         this.agendamentoRepository = agendamentoRepository;
     }
 
 
-    public boolean existByDoctorAndDatetime(DoctorModel doctorModel, Date date){
-        return agendamentoRepository.existsByDatetimeAndDoctor(date, doctorModel);
+    public boolean existByDoctorAndDatetime(String doctorCode, String date){
+        return agendamentoRepository.existsByDatetimeAndDoctorname(date, doctorCode);
     }
 
-    public boolean exsitByCode(long code){
+    public boolean exsitByCode(String code){
         return  agendamentoRepository.existsByCode(code);
     }
 

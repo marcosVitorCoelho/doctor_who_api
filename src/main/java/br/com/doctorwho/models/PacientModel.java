@@ -16,10 +16,7 @@ public class PacientModel implements Person {
     private UUID id;
 
     @Column(nullable = false, unique = true, length = 15)
-    private String firstName;
-
-    @Column(nullable = false, unique = true, length = 15)
-    private String lastName;
+    private String fullName;
 
     @Column(nullable = false, unique = true, length = 10)
     private String rg;

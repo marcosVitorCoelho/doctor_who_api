@@ -45,6 +45,10 @@ public class DoctorServices  {
     public Optional<DoctorModel> findById(UUID id){
         return doctorRepository.findById(id);
     }
+
+    public DoctorModel findByFullName(String name) {
+        return doctorRepository.findByFullName(name);
+    }
 @Transactional
     public void delete(DoctorModel doctorModel){
         doctorRepository.delete(doctorModel);

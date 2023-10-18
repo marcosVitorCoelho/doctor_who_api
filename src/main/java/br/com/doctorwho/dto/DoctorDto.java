@@ -14,11 +14,7 @@ public class DoctorDto   {
 
     @NotBlank
     @Size(min = 1, max = 15)
-    private String firstName;
-
-    @NotBlank
-    @Size(min = 1, max = 15)
-    private String lastName;
+    private String fullName;
 
     @NotBlank
     @Size(min = 10, max = 10)

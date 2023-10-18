@@ -11,11 +11,7 @@ import lombok.Data;
 public class PacientDto  {
     @NotBlank
     @Size(min = 1, max = 15)
-    private String firstName;
-
-    @NotBlank
-    @Size(min = 1, max = 15)
-    private String lastName;
+    private String FullName;
 
     @NotBlank
     @Size(min = 10, max = 10)

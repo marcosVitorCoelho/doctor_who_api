@@ -122,8 +122,7 @@ public class DoctorController   {
         doctorModel.setEmail(doctorDto.getEmail());
         doctorModel.setPhoneNumber(doctorDto.getPhoneNumber());
         doctorModel.setAddress(doctorDto.getAddress());
-        doctorModel.setFirstName(doctorDto.getFirstName());
-        doctorModel.setLastName(doctorDto.getLastName());
+        doctorModel.setFullName(doctorDto.getFullName());
         doctorModel.setBirthday(doctorDto.getBirthday());
         doctorModel.setCrm(doctorDto.getCrm());
 

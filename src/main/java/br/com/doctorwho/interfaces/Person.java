@@ -5,11 +5,8 @@ import java.time.LocalDateTime;
 import br.com.doctorwho.models.AddressModel;
 
 public interface Person  {
-    String getFirstName();
-    void setFirstName(String firstName);
-
-    String getLastName();
-    void setLastName(String lastName);
+    String getFullName();
+    void setFullName(String fullName);
 
     String getRg();
     void setRg(String rg);

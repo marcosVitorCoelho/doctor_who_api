@@ -11,6 +11,7 @@ import br.com.doctorwho.services.DoctorServices;
 import br.com.doctorwho.services.PacientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,37 +23,35 @@ import java.util.UUID;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/agendamento")
 public class AgendamentoControler {
-    AgendamentoServices agendamentoServices;
-    DoctorServices doctorServices;
-    PacientService pacientService;
-/* Falta terminar, não tá compelto*/
+
+    final AgendamentoServices agendamentoServices;
+    
+    @Autowired
+    private DoctorServices doctorServices;
+
+    @Autowired
+    private PacientService pacientService;
+
+    public AgendamentoControler(AgendamentoServices agendamentoServices){
+        this.agendamentoServices = agendamentoServices;
+    }
+
+
     @PostMapping
     public ResponseEntity<Object> saveAgendamento(@RequestBody @Valid AgendamentoDto agendamentoDto) {
 
-        PacientModel pacient = pacientService.findByFullName(agendamentoDto.getPacientfULLName()) ;
+        PacientModel pacient = pacientService.findByFullName(agendamentoDto.getPacient().getFullName()) ;
         if (pacient == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pacient Not found") ;
         }
-        DoctorModel doctor = doctorServices.findByFullName(agendamentoDto.getDoctorname()) ;
+        DoctorModel doctor = doctorServices.findByFullName(agendamentoDto.getDoctor().getFullName()) ;
         if (doctor == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor Not found");
         }
          var agendamentoModel = new AgendamentoModel();
         BeanUtils.copyProperties(agendamentoDto, agendamentoModel);
 
-        agendamentoModel.setPacientCode(pacient.getId().toString());
-        agendamentoModel.setPacientname(pacient.getFullName());
-        agendamentoModel.setPacietPhoneumber(pacient.getPhoneNumber());
-
-        agendamentoModel.setDoctorCode(doctor.getId().toString());
-        agendamentoModel.setDoctorSpeciality(doctor.getMedicalSpecialty());
-        agendamentoModel.setDoctorname(doctor.getFullName());
-
-        if (agendamentoServices.existByDoctorAndDatetime( agendamentoModel.getDoctorname(), agendamentoModel.getDatetime() )) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("This time isn't available");
-        }
         return ResponseEntity.status(HttpStatus.CREATED).body(agendamentoServices.save(agendamentoModel));
-
     }
 
 
@@ -60,11 +59,12 @@ public class AgendamentoControler {
     public ResponseEntity<List<AgendamentoModel>> getAllAgendamentos() {
         return ResponseEntity.status(HttpStatus.OK).body(agendamentoServices.findAll());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneAgendamento(@PathVariable(value = "id") UUID id){
         Optional<AgendamentoModel> agendamentoModelOptional = agendamentoServices.findByid(id);
         if (!agendamentoModelOptional.isPresent()){
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(" not found");
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
         }
         return ResponseEntity.status(HttpStatus.OK).body(agendamentoModelOptional.get());
     }
@@ -86,10 +86,11 @@ public class AgendamentoControler {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(" not found" );
         }
         var  agendamentoModel = agendamentoModeloptional.get();
-        agendamentoModel.setPacientname(agendamentoDto.getPacientfULLName());
-        agendamentoModel.setDoctorname(agendamentoDto.getDoctorname());
+        agendamentoModel.setAppointmentDate(agendamentoDto.getAppointmentDate());
+        agendamentoModel.setPacient(agendamentoDto.getPacient());
+        agendamentoModel.setDoctor(agendamentoDto.getDoctor());
         agendamentoModel.setAppointmentType(agendamentoDto.getAppointmentType());
-       agendamentoModel.setIsreturn(agendamentoDto.getIsreturn());
+        agendamentoModel.setIsreturn(agendamentoDto.getIsreturn());
 
         return ResponseEntity.status(HttpStatus.OK).body(agendamentoServices.save(agendamentoModel) );
     }

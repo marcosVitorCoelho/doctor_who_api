@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/pacient")
+@RequestMapping("/pacient1")
 public class PacientController {
 
     final PacientService pacientService;
@@ -34,7 +34,7 @@ public class PacientController {
 
 
     @PostMapping
-    public ResponseEntity<Object> savePacient(@RequestPart("doctorDto") @Valid PacientDto pacientDto,
+    public ResponseEntity<Object> savePacient(@RequestPart("pacientDto") @Valid PacientDto pacientDto,
                                              @RequestPart("file") MultipartFile file) {
         /*verifica se os dados já existem, caso não exitam, ele cria novo médico*/
         if (pacientService.existsByRg(pacientDto.getRg())){
@@ -52,7 +52,7 @@ public class PacientController {
         }
 
         var pacientModel = new PacientModel();
-       BeanUtils.copyProperties(pacientDto, pacientModel);
+        BeanUtils.copyProperties(pacientDto, pacientModel);
 
         ResponseEntity<String> uploadResponse = fileUploadController.uploadFile(file);
 

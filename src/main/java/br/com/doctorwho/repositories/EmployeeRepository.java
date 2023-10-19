@@ -1,17 +1,16 @@
 package br.com.doctorwho.repositories;
 
-import br.com.doctorwho.models.PacientModel;
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import br.com.doctorwho.models.EmployeeModel;
 
-import java.util.UUID;
 @Repository
-public interface PacientRepository extends JpaRepository<PacientModel, UUID>  {
+public interface EmployeeRepository extends JpaRepository<EmployeeModel, UUID>{
     boolean existsByCpf(String cpf);
     boolean existsByRg(String rg);
     boolean existsByPhoneNumber(String phoneNumber);
-    boolean existsByEmail(String email);
-    public  PacientModel findByFullName(String fullname);
-
+    EmployeeModel findByFullName(String name);
 }

@@ -1,14 +1,16 @@
 package br.com.doctorwho.dto;
 
-import br.com.doctorwho.models.AddressModel;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import br.com.doctorwho.models.AddressModel;
+
 @Data
-public class PacientDto  {
+public class EmployeeDto   {
+
     @NotBlank
     @Size(min = 1, max = 15)
     private String fullName;
@@ -34,4 +36,11 @@ public class PacientDto  {
     @NotBlank
     private String birthday;
 
+    @NotBlank
+    private String hired;
+
+    private String fired;
+
+    @NotBlank
+    private String role;
 }

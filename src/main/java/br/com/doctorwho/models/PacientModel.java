@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "TB_PACIENTs")
+@Table(name = "TB_PACIENT1s")
 @Data
 public class PacientModel implements Person {
     @Id

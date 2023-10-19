@@ -1,16 +1,21 @@
 package br.com.doctorwho.models;
 
-import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import br.com.doctorwho.interfaces.Person;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 
 @Entity
-@Table(name = "TB_DOCTOR2")
+@Table(name = "TB_EMPLOYEES")
 @Data
-public class DoctorModel implements Person {
+public class EmployeeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -32,18 +37,21 @@ public class DoctorModel implements Person {
 
     @Column(nullable = false, length = 15)
     private String birthday;
+
+    @Column(nullable = false, length = 15)
+    private String hired ;
+
+    @Column(nullable = true, length = 15)
+    private String fired;
     
     @Column(nullable = false)
     private LocalDateTime registrationDate;
 
     @Column(nullable = false)
-    private AddressModel address;
+    private String role;
 
     @Column(nullable = false)
-    private String crm;
-
-    @Column(nullable = false, length = 50)
-    private String medicalSpecialty;
+    private AddressModel address;
 
     private String cloudinaryImageURL;
 }

@@ -1,8 +1,6 @@
 package br.com.doctorwho.models;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -14,25 +12,20 @@ public class AgendamentoModel {
     @GeneratedValue(strategy = GenerationType.AUTO  )
     private UUID id;
 
+    @Column(nullable = false, length = 15)
+    private String appointmentDate;
 
-    private String code;
-    private String datetime;
-    @Column(nullable = false)
-    private String pacientname;
-    @Column(nullable = false)
-    private String pacientCode = null;
-    @Column(nullable = false)
-    private String pacietPhoneumber;
-    @Column(nullable = false)
-    private String doctorname;
-    @Column(nullable = false)
-    private String doctorCode;
-    @Column(nullable = false)
-    private String doctorSpeciality = null;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private PacientModel pacient;
 
-    private String  appointmentType;
+    @ManyToOne
+    @JoinColumn(name = "doutor_id")
+    private DoctorModel doctor;
 
-    private String isreturn;
+    @Column(nullable = false)
+    private String appointmentType;
 
-
+    @Column(nullable = false)
+    private Boolean isreturn;
 }

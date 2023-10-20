@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Table(name = "TB_PROCEDIMENTO")
+@Table(name = "TB_PROCEDIMENTO" )
 @Entity
 
 public class ProcedimentosModel {

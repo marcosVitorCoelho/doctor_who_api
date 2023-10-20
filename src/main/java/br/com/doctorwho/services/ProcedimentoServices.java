@@ -21,12 +21,12 @@ public class ProcedimentoServices  {
     public ProcedimentosModel save(ProcedimentosModel procedimentosModel){
         return procedimentoRespository.save(procedimentosModel);
     }
-    public List<ProcedimentosModel> findAll(){
+    public List<ProcedimentosModel>  findAll(){
         return procedimentoRespository.findAll();
     }
     public Optional<ProcedimentosModel> findById(UUID id){
         return procedimentoRespository.findById(id);
-    }
+     }
     @Transactional
     public void delete(ProcedimentosModel procedimentosModel){
         procedimentoRespository.delete(procedimentosModel);

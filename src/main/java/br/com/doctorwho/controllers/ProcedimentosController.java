@@ -48,7 +48,7 @@ public class ProcedimentosController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}" )
     public ResponseEntity<Object> getOneProcedimento(@PathVariable(value = "id") UUID id){
         Optional<ProcedimentosModel> procedimentosModelOptional = procedimentoServices.findById(id);
         if (!procedimentosModelOptional.isPresent()){

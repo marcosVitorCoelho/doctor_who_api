@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ProcedimentoRespository extends JpaRepository<ProcedimentosModel, UUID> {
+public interface ProcedimentoRespository  extends JpaRepository<ProcedimentosModel, UUID> {
 
      boolean existsByDescription(String description);
 }

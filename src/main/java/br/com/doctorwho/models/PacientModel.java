@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "TB_PACIENT1s")
+@Table(name = "TB_PACIENTs")
 @Data
 public class PacientModel implements Person {
     @Id
@@ -32,7 +32,7 @@ public class PacientModel implements Person {
 
     @Column(nullable = false, length = 15)
     private String birthday;
-    
+
     @Column(nullable = false)
     private LocalDateTime RegistrationDate;
 

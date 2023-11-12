@@ -8,7 +8,7 @@ import java.util.UUID;
 import br.com.doctorwho.interfaces.Person;
 
 @Entity
-@Table(name = "TB_DOCTOR2")
+@Table(name = "TB_DOCTOR")
 @Data
 public class DoctorModel implements Person {
     @Id
@@ -32,7 +32,7 @@ public class DoctorModel implements Person {
 
     @Column(nullable = false, length = 15)
     private String birthday;
-    
+
     @Column(nullable = false)
     private LocalDateTime registrationDate;
 

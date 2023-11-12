@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "TB_AGENDAMENTO1")
+@Table(name = "TB_AGENDAMENTO")
 public class AgendamentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO  )

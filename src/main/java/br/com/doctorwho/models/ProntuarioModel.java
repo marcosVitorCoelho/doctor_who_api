@@ -22,8 +22,13 @@ public class ProntuarioModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
-    private PacientModel pacient;
+    private UUID pacientID;
+
+    private  String nomePaciet;
+
+    private String cpfPacient;
+
+    private String numeroPacient;
+
 
 }

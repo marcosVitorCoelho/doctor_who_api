@@ -22,7 +22,7 @@ public class ProntuarioController {
     }
 
     @GetMapping("/{id}")
-    public ProntuarioModel getProntuarioById(@PathVariable UUID id) {
+    public ProntuarioModel getProntuarioById(@PathVariable(value = "id")UUID id) {
         return prontuarioService.getProntuarioById(id);
     }
 
@@ -32,12 +32,12 @@ public class ProntuarioController {
     }
 
     @PutMapping("/{id}")
-    public ProntuarioModel updateProntuario(@PathVariable UUID id, @RequestBody ProntuarioModel updatedProntuario) {
+    public ProntuarioModel updateProntuario(@PathVariable(value = "id")UUID id, @RequestBody ProntuarioModel updatedProntuario) {
         return prontuarioService.updateProntuario(id, updatedProntuario);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProntuario(@PathVariable UUID id) {
+    public void deleteProntuario(@PathVariable(value = "id")UUID id) {
         prontuarioService.deleteProntuario(id);
     }
 

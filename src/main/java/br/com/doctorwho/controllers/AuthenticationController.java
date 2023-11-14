@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import br.com.doctorwho.user.RegisterDto;
 import br.com.doctorwho.user.User;
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 5000)
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
